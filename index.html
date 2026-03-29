@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sachin Kumar — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:   #0D1B2A;
+    --blue:   #2563EB;
+    --cyan:   #06B6D4;
+    --gold:   #F59E0B;
+    --bg:     #F8F9FC;
+    --card:   #FFFFFF;
+    --text:   #1E293B;
+    --muted:  #64748B;
+    --border: #E2E8F0;
+    --grad: linear-gradient(135deg, #0D1B2A 0%, #1e3a5f 60%, #2563EB 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(13,27,42,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--cyan); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--grad);
+    display: flex; align-items: center;
+    padding: 100px 5vw 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(6,182,212,0.15);
+    border: 1px solid rgba(6,182,212,0.4);
+    color: var(--cyan);
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    color: #fff;
+    line-height: 1.1;
+    animation: fadeUp 0.7s 0.1s ease both;
+    margin-bottom: 0.5rem;
+  }
+  h1 em { color: var(--cyan); font-style: italic; }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.6);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 1.2rem 0 2rem;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--cyan); color: var(--navy);
+    padding: 12px 28px; border-radius: 8px;
+    font-weight: 700; font-size: 0.88rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(6,182,212,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.5); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.3); color: #fff;
+    padding: 12px 28px; border-radius: 8px;
+    font-weight: 600; font-size: 0.88rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--cyan); background: rgba(6,182,212,0.1); }
+
+  /* Stats cards */
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--cyan);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* Decorative circles */
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .deco-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,235,0.25) 0%, transparent 70%); top: -100px; right: -100px; }
+  .deco-2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(6,182,212,0.15) 0%, transparent 70%); bottom: -50px; left: 30%; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 5vw; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--blue);
+    background: rgba(37,99,235,0.08);
+    padding: 4px 12px; border-radius: 100px;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .section-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.7; max-width: 600px; margin-bottom: 3rem; }
+
+  /* ── ABOUT ── */
+  #about { background: #fff; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+  .about-avatar {
+    width: 100%; aspect-ratio: 1;
+    border-radius: 24px;
+    background: var(--grad);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: -2px;
+    box-shadow: 0 24px 60px rgba(13,27,42,0.2);
+    position: relative; overflow: hidden;
+    max-width: 280px;
+  }
+  .about-avatar::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+    background: linear-gradient(to top, rgba(6,182,212,0.2), transparent);
+  }
+  .about-highlight {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .about-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(37,99,235,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+  }
+  .about-highlight-text strong { display: block; font-size: 0.9rem; color: var(--navy); margin-bottom: 2px; }
+  .about-highlight-text span { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--grad);
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,27,42,0.1); }
+  .skill-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+  .skill-title { font-size: 0.9rem; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    background: rgba(37,99,235,0.07);
+    color: var(--blue);
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(37,99,235,0.15);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: #fff; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--cyan));
+  }
+  .tl-item { position: relative; margin-bottom: 2.5rem; padding-left: 1.5rem; }
+  .tl-dot {
+    position: absolute; left: -2.35rem; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--blue); border: 3px solid #fff;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .tl-dot.active { background: var(--cyan); box-shadow: 0 0 0 2px var(--cyan), 0 0 12px rgba(6,182,212,0.5); }
+  .tl-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .tl-title { font-size: 1rem; font-weight: 700; color: var(--navy); }
+  .tl-badge {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 100px;
+    background: rgba(6,182,212,0.1); color: var(--cyan);
+    border: 1px solid rgba(6,182,212,0.3);
+  }
+  .tl-company { font-size: 0.85rem; color: var(--blue); font-weight: 600; margin-bottom: 6px; }
+  .tl-date { font-size: 0.78rem; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 0.85rem; color: var(--text); line-height: 1.65;
+    padding-left: 1.2rem; position: relative; margin-bottom: 4px;
+  }
+  .tl-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--blue); font-size: 0.7rem; top: 3px; }
+  .tl-tools {
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--muted);
+    background: var(--bg); padding: 6px 12px; border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  #achievements { background: var(--grad); }
+  #achievements h2 { color: #fff; }
+  #achievements .section-label { background: rgba(6,182,212,0.2); }
+  #achievements .section-desc { color: rgba(255,255,255,0.6); }
+  .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+  .ach-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s;
+  }
+  .ach-card:hover { transform: translateY(-4px); }
+  .ach-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem; color: var(--cyan); line-height: 1; margin-bottom: 6px;
+  }
+  .ach-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--bg); }
+  .edu-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .edu-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: var(--grad); display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .edu-deg { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .edu-inst { font-size: 0.82rem; color: var(--blue); font-weight: 600; margin-bottom: 4px; }
+  .edu-yr { font-size: 0.78rem; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  .cert-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .cert-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px;
+    transition: border-color 0.2s;
+  }
+  .cert-item:hover { border-color: var(--blue); }
+  .cert-badge { width: 36px; height: 36px; border-radius: 10px; background: rgba(37,99,235,0.1); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .cert-name { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+  .cert-org { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: #fff; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--grad); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+  .contact-value { font-size: 0.9rem; color: var(--navy); font-weight: 600; }
+  .contact-value a { color: var(--blue); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  .availability-card {
+    background: var(--grad);
+    border-radius: 20px; padding: 2rem;
+    color: #fff;
+  }
+  .avail-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; margin-right: 8px; animation: pulse 1.5s infinite; }
+  .availability-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.4rem; margin: 0.75rem 0 0.5rem; }
+  .availability-card p { font-size: 0.85rem; opacity: 0.75; line-height: 1.65; margin-bottom: 1.25rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.5);
+    text-align: center; padding: 2rem 5vw;
+    font-size: 0.8rem;
+  }
+  footer span { color: var(--cyan); }
+
+  /* ── GOOGLE SITES NOTICE ── */
+  .gsites-banner {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1.5px solid #86efac;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-top: 3rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .gsites-icon { font-size: 2rem; flex-shrink: 0; }
+  .gsites-title { font-size: 0.95rem; font-weight: 700; color: #166534; margin-bottom: 6px; }
+  .gsites-steps { font-size: 0.82rem; color: #15803d; line-height: 1.8; }
+  .gsites-steps ol { padding-left: 1.2rem; }
+
+  @media (max-width: 768px) {
+    .hero-grid, .about-grid, .edu-cert-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .about-avatar { max-width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sachin<span>.</span>K</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Wins</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-deco deco-1"></div>
+  <div class="hero-deco deco-2"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">Available for Opportunities</div>
+      <h1>Sachin<br><em>Kumar</em></h1>
+      <p class="hero-sub">
+        Data Analyst & MIS Specialist turning raw retail data into powerful business decisions.
+        Power BI · SQL · Microsoft Dynamics 365 · Advanced Excel.
+      </p>
+      <div class="hero-btns">
+        <a href="mailto:sachinkumar01105@gmail.com" class="btn-primary">Get In Touch</a>
+        <a href="https://www.linkedin.com/in/sachinkumar01105" target="_blank" class="btn-outline">LinkedIn Profile</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">2+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5K+</div>
+        <div class="stat-label">SKUs Tracked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">35%</div>
+        <div class="stat-label">Productivity Boost</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">99%</div>
+        <div class="stat-label">Inventory Accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="about-avatar">SK</div>
+      </div>
+      <div>
+        <div class="section-label">About Me</div>
+        <h2>Retail Data Analyst with a Knack for Storytelling</h2>
+        <p class="section-desc">
+          I specialize in transforming complex retail transaction data into clear, decision-ready insights.
+          Currently at Senco Gold & Diamonds, I build dashboards and MIS systems that empower leadership
+          to act confidently — faster.
+        </p>
+        <div class="about-highlight">
+          <div class="about-icon">📊</div>
+          <div class="about-highlight-text">
+            <strong>Power BI & ERP Reporting Expert</strong>
+            <span>Hands-on with Dynamics 365, Fabric Paginated Reports, DAX optimization, and financial reconciliation.</span>
+          </div>
+        </div>
+        <div class="about-highlight">
+          <div class="about-icon">🏪</div>
+          <div class="about-highlight-text">
+            <strong>Jewellery & Multi-Store Retail Specialist</strong>
+            <span>Deep domain expertise in zone-wise KPIs, ATV, UPT, MoM/YoY growth tracking across multi-location retail.</span>
+          </div>
+        </div>
+        <div class="about-highlight">
+          <div class="about-icon">⚡</div>
+          <div class="about-highlight-text">
+            <strong>Automation-First Mindset</strong>
+            <span>Reduced manual reporting workloads significantly through Google Sheets, Power Query, and Looker Studio automation.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Skills</div>
+    <h2>Tools & Technologies</h2>
+    <p class="section-desc">My core tech stack for data analytics, business intelligence, and MIS reporting.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">📈</div>
+        <div class="skill-title">BI & Visualization</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span><span class="tag">DAX</span>
+          <span class="tag">Looker Studio</span><span class="tag">Fabric Reports</span>
+          <span class="tag">Data Modeling</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-title">Data & Databases</div>
+        <div class="skill-tags">
+          <span class="tag">SQL (MySQL)</span><span class="tag">Advanced Excel</span>
+          <span class="tag">Power Query</span><span class="tag">Pivot Tables</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-title">ERP & Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">MS Dynamics 365</span><span class="tag">Logic ERP</span>
+          <span class="tag">Uniware</span><span class="tag">Google Workspace</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🧮</div>
+        <div class="skill-title">Analytics & Reporting</div>
+        <div class="skill-tags">
+          <span class="tag">Retail KPI Analytics</span><span class="tag">MIS Reporting</span>
+          <span class="tag">SKU Analysis</span><span class="tag">MoM/YoY Tracking</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛒</div>
+        <div class="skill-title">Marketplace Analytics</div>
+        <div class="skill-tags">
+          <span class="tag">Myntra</span><span class="tag">Amazon</span>
+          <span class="tag">Flipkart</span><span class="tag">Meesho</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-title">Programming & AI</div>
+        <div class="skill-tags">
+          <span class="tag">Python (Intro)</span><span class="tag">Google Sheets Scripts</span>
+          <span class="tag">AI Tools</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career Journey</div>
+    <h2>Professional Experience</h2>
+    <p class="section-desc">Building impact through data, one dashboard at a time.</p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot active"></div>
+        <div class="tl-header">
+          <span class="tl-title">MIS Executive — Retail Analytics</span>
+          <span class="tl-badge">Current</span>
+        </div>
+        <div class="tl-company">Senco Gold and Diamonds · New Delhi</div>
+        <div class="tl-date">Apr 2025 – Present · 1 year</div>
+        <ul class="tl-bullets">
+          <li>Built interactive Power BI dashboards to monitor retail sales performance, revenue trends, and store-level KPIs across jewellery operations.</li>
+          <li>Developed Fabric Paginated Reports integrated with Microsoft Dynamics 365 for structured reporting and financial reconciliation.</li>
+          <li>Optimized DAX measures tracking Sales Growth (MoM/YoY), Average Ticket Value (ATV), Units Per Transaction (UPT), and category/store-wise performance.</li>
+          <li>Performed data validation and error auditing ensuring 100% reporting accuracy between Dynamics 365 and Power BI.</li>
+        </ul>
+        <div class="tl-tools">⚙ Power BI · DAX · Microsoft Fabric · Dynamics 365 · Advanced Excel</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-title">MIS Executive</span>
+        </div>
+        <div class="tl-company">John Pride · New Delhi</div>
+        <div class="tl-date">Aug 2024 – Feb 2025 · 7 months</div>
+        <ul class="tl-bullets">
+          <li>Developed B2B performance dashboards for Myntra, Amazon, Flipkart & Meesho tracking sales, inventory, and revenue.</li>
+          <li>Monitored 5,000+ SKUs using Uniware achieving 99% inventory accuracy with daily GRN verification.</li>
+          <li>Analyzed marketplace sales trends to improve order fulfillment efficiency.</li>
+        </ul>
+        <div class="tl-tools">⚙ Advanced Excel · Pivot Tables · Uniware · Marketplace Analytics · Logic ERP</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-title">MIS Executive</span>
+        </div>
+        <div class="tl-company">Growth Jet Media · New Delhi</div>
+        <div class="tl-date">Oct 2023 – Jul 2024 · 10 months</div>
+        <ul class="tl-bullets">
+          <li>Automated repetitive reporting using advanced Google Sheets formulas, improving team productivity by 35%.</li>
+          <li>Designed Looker Studio dashboards to manage task tracking across teams.</li>
+          <li>Maintained centralized reporting systems with daily/weekly/monthly performance reports.</li>
+        </ul>
+        <div class="tl-tools">⚙ Google Sheets · Looker Studio · Data Automation · Reporting Systems</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-title">Data Management Intern</span>
+        </div>
+        <div class="tl-company">Shashi Shekhar Publications Pvt. Ltd. · Remote</div>
+        <div class="tl-date">Mar 2023 – Jul 2023 · 5 months</div>
+        <ul class="tl-bullets">
+          <li>Compiled structured admission datasets (GPA, SAT, ACT) coordinating with multiple universities.</li>
+          <li>Designed centralized Google Sheet frameworks for efficient data collection and structured comparison.</li>
+        </ul>
+        <div class="tl-tools">⚙ Google Sheets · Data Cleaning · Data Structuring</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-label">Impact & Results</div>
+    <h2>Key Achievements</h2>
+    <p class="section-desc">Numbers that tell the story of real business impact.</p>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <div class="ach-num">35%</div>
+        <div class="ach-text">Improved team productivity at Growth Jet Media through workflow automation and structured data management.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">99%</div>
+        <div class="ach-text">Inventory accuracy maintained across 5,000+ SKUs at John Pride through rigorous daily auditing processes.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">100%</div>
+        <div class="ach-text">Reporting accuracy achieved at Senco Gold by eliminating discrepancies between Dynamics 365 and Power BI.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-num">5K+</div>
+        <div class="ach-text">SKUs tracked in real-time using Uniware, minimizing stock discrepancies across operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Credentials</div>
+    <h2>Education & Certifications</h2>
+    <p class="section-desc">Academic foundation and continuous learning in data and analytics.</p>
+    <div class="edu-cert-grid">
+      <div>
+        <div class="edu-card">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-deg">Bachelor of Commerce (B.Com)</div>
+            <div class="edu-inst">University of Delhi — DU SOL</div>
+            <div class="edu-yr">Accounting & Finance · Apr 2019 – Aug 2022</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-badge">🗄️</div>
+            <div>
+              <div class="cert-name">MySQL — Database Management</div>
+              <div class="cert-org">MySQL Certification</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">🐍</div>
+            <div>
+              <div class="cert-name">Introduction to Programming Using Python</div>
+              <div class="cert-org">Programming Certification</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-badge">📊</div>
+            <div>
+              <div class="cert-name">Power BI — Business Intelligence</div>
+              <div class="cert-org">Data Visualization Certification</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Connect</div>
+    <h2>Get In Touch</h2>
+    <p class="section-desc">Open to Data Analyst and Retail Analytics opportunities. Let's talk data!</p>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:sachinkumar01105@gmail.com">sachinkumar01105@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🔗</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value"><a href="https://www.linkedin.com/in/sachinkumar01105" target="_blank">linkedin.com/in/sachinkumar01105</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-value">New Delhi, Delhi, India</div>
+          </div>
+        </div>
+
+        <!-- Google Sites Instructions -->
+        <div class="gsites-banner">
+          <div class="gsites-icon">🌐</div>
+          <div>
+            <div class="gsites-title">How to Publish on Google Sites (Free!)</div>
+            <div class="gsites-steps">
+              <ol>
+                <li>Go to <strong>sites.google.com</strong> → Click <strong>"+ Blank"</strong></li>
+                <li>Name your site: <em>"Sachin Kumar — Data Analyst"</em></li>
+                <li>Use <strong>Insert → Embed</strong> to add sections, or build manually using this portfolio as a design guide</li>
+                <li>Add pages: Home · About · Experience · Skills · Contact</li>
+                <li>Click <strong>"Publish"</strong> → Your URL: <em>sites.google.com/view/sachinkumar</em></li>
+                <li>Share the link on your resume &amp; LinkedIn! 🚀</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="availability-card">
+        <span class="avail-dot"></span><span style="font-size:0.8rem;color:rgba(255,255,255,0.7);font-weight:600;">OPEN TO OPPORTUNITIES</span>
+        <h3>Let's Build Something with Data</h3>
+        <p>I'm actively looking for Data Analyst, MIS Executive, and Retail Analytics roles where I can drive business decisions through data. Whether it's jewellery retail, e-commerce, or any multi-store environment — let's connect!</p>
+        <a href="mailto:sachinkumar01105@gmail.com" class="btn-primary" style="display:inline-block;">Send Me a Message →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed & built for <span>Sachin Kumar</span> · Data Analyst · New Delhi, India · 2025</p>
+</footer>
+
+</body>
+</html>
